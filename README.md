@@ -150,5 +150,24 @@ From the broker's interactive prompt, you can manage the fleet:
 
 ### **4\. Agent Actions**
 
-When an agent receives a command (e.g., `UPDATE tonight`), it looks inside its action\_dir for a matching INI file (e.g., actions/UPDATE.ini). It searches for the `[tonight]` block and safely executes the underlying shell command, reporting the success or failure back to the broker's audit log.
+When an agent receives a command (e.g., `UPDATE tonight`), it looks inside its action\_dir for a matching INI file (e.g., actions/UPDATE.ini). It searches for the `[tonight]` block and safely executes the underlying shell command, reporting the success or failure back to the broker's audit log.  
 
+```
+; /etc/mgmt/actions/UPDATE.ini
+; Comments start with a semicolon or hash
+
+[now]
+cmd = /bin/bash
+target = /path/to/update_script.sh
+arguments = ""
+
+[tonight]
+cmd = /bin/bash
+target = /path/to/update_script.sh
+arguments = "-t 2100"
+
+[tomorrow_night]
+cmd = /bin/bash
+target = /path/to/update_script.sh
+arguments = "-t 'tomorrow at 2100'"
+```
