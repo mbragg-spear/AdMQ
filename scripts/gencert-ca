@@ -4,4 +4,4 @@
 openssl genrsa -out ca.key 4096
 
 # Generate the CA's self-signed Root Certificate (valid for 10 years)
-openssl req -new -x509 -days 3650 -key ca.key -out ca.crt -subj "/CN=JepMQAuthority"
+openssl req -new -x509 -days 3650 -key ca.key -out ca.crt -subj "/CN=AdMQAuthority"

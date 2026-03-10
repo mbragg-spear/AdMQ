@@ -6,8 +6,9 @@
 openssl genrsa -out server.key 2048
 
 # Create a Certificate Signing Request (CSR) for the server
-# Note: The CN (Common Name) should match the hostname clients use to connect.
-openssl req -new -key server.key -out server.csr -subj "/CN=localhost"
+# Note: The CN (Common Name) should match the hostname clients are connecting to.
+#       So you'll likely want to make this "/CN=*your server hostname*"
+openssl req -new -key server.key -out server.csr -subj "/CN=$(hostname -s)"
 
 # Use the CA to sign the Server's CSR, creating the final server certificate
 openssl x509 -req -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt

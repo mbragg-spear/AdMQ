@@ -1,13 +1,14 @@
 #!/bin/bash
 
-
 ### Test script for acquiring a signed certificate from the server. ###
 
 openssl genrsa -out certs/client.key 2048
-CSR=$(openssl req -new -key certs/client.key -subj "/CN=localhost")
+# Note: The CN (Common Name) should match the hostname clients use to connect to the server.
+#       For most purposes, $(hostname -s) should be sufficient.
+CSR=$(openssl req -new -key certs/client.key -subj "/CN=$(hostname -s)")
 
 
-OUTPUT=$((echo "ENROLL localhost"; echo "$CSR") | nc localhost 35566)
+OUTPUT=$((echo "ENROLL $(hostname -s)"; echo "$CSR") | nc $ADMQ_SERVER 35566)
 
 read -r RESULT <<< $OUTPUT
 echo $RESULT

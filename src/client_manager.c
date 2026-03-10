@@ -214,5 +214,5 @@ void client_manager_print_status() {
     pthread_rwlock_unlock(&clients_rwlock);
 
     if (count == 0) printf("  No agents connected.\n");
-    printf("========================\namdq> ");
+    printf("========================\n");
 }

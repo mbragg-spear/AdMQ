@@ -2,9 +2,10 @@
 
 ### Test script for connecting directly to the server using as a client. ###
 
+SERVER_ADDR=127.0.0.1
 SERVER_PORT=35565
 CRT=certs/client.crt
 KEY=certs/client.key
 CA=certs/ca.crt
 
-openssl s_client -quiet -connect 127.0.0.1:35565 -cert $CRT -key $KEY -CAfile $CA
+openssl s_client -quiet -connect $SERVER_ADDR:$SERVER_PORT -cert $CRT -key $KEY -CAfile $CA
